@@ -1,4 +1,6 @@
 from __future__ import annotations
+import lzma
+import pickle
 
 from typing import TYPE_CHECKING
 
@@ -54,3 +56,9 @@ class Engine:
 
         render_names_at_mouse_location(
             console=console, x=21, y=44, engine=self)
+
+    def save_as(self, filename: str) -> None:
+        """Save this engine instance as a compressed file."""
+        save_data = lzma.compress(pickle.dumps(self))
+        with open(filename, 'wb') as f:
+            f.write(save_data)

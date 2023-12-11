@@ -1,3 +1,7 @@
+# folders
 /__pycache__
 components/__pycache__/
 /venv
+
+# saved games
+*.sav
