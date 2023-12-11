@@ -15,6 +15,7 @@ if TYPE_CHECKING:
 
 T = TypeVar('T', bound='Entity')
 
+
 class Entity:
     """
     A generic object to represent players, enemies, items, etc...
@@ -62,7 +63,7 @@ class Entity:
         self.x = x
         self.y = y
         if gamemap:
-            if hasattr(self, "parent"): # Possibly uninitialized
+            if hasattr(self, "parent"):  # Possibly uninitialized
                 if self.parent is self.gamemap:
                     self.gamemap.entities.remove(self)
             self.parent = gamemap
@@ -70,7 +71,7 @@ class Entity:
 
     def distance(self, x: int, y: int) -> float:
         """Return the distance between the current entity and the given (x, y) coordinate"""
-        return math.sqrt((x - self.x) ** 2 + (y -self.y) ** 2)
+        return math.sqrt((x - self.x) ** 2 + (y - self.y) ** 2)
 
     def move(self, dx: int, dy: int) -> None:
         self.x += dx
@@ -114,25 +115,25 @@ class Actor(Entity):
 
 
 class Item(Entity):
-   def __init__(
-       self,
-       *,
-       x: int = 0,
-       y: int = 0,
-       char: str = "?",
-       color: Tuple[int, int, int] = (255, 255, 255),
-       name: str = "<Unnamed>",
-       consumable: Consumable,
-   ):
-       super().__init__(
-           x=x,
-           y=y,
-           char=char,
-           color=color,
-           name=name,
-           blocks_movement=False,
-           render_order=RenderOrder.ITEM,
-       )
+    def __init__(
+        self,
+        *,
+        x: int = 0,
+        y: int = 0,
+        char: str = "?",
+        color: Tuple[int, int, int] = (255, 255, 255),
+        name: str = "<Unnamed>",
+        consumable: Consumable,
+    ):
+        super().__init__(
+            x=x,
+            y=y,
+            char=char,
+            color=color,
+            name=name,
+            blocks_movement=False,
+            render_order=RenderOrder.ITEM,
+        )
 
-       self.consumable = consumable
-       self.consumable.parent = self
+        self.consumable = consumable
+        self.consumable.parent = self
